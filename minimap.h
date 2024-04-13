@@ -27,7 +27,9 @@ void DisplayMinimap(Minimap *minimap, SDL_Surface *screen);
 void FreeMinimap(Minimap *minimap);
 
 SDL_Color GetPixel(SDL_Surface *pSurface,int x,int y);
-int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso)
+int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso);
+
+void affichertemps(int temps);
 
 #endif /* MINIMAP_H */
 
