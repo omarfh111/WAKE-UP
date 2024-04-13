@@ -102,6 +102,42 @@ void FreeMinimap(Minimap *minimap) {
     minimap->puzzleImage = NULL;
 }
 
+SDL_Color GetPixel(SDL_Surface *pSurface,int x,int y) 
+{ SDL_Color color; Uint32 col=0; 
+//Determine position 
+char* pPosition=(char* ) pSurface->pixels; 
+pPosition+= (pSurface->pitch * y); 
+pPosition+= (pSurface->format->BytesPerPixel *x); 
+memcpy(&col ,pPosition ,pSurface->format->BytesPerPixel); 
+//convertir color
+ SDL_GetRGB(col,pSurface->format, &color.r, &color.g, &color.b);
+  return (color);
+  }
+  
+  
+int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso)
+{
+    // Coordinates of the 8 points around the character
+    int pointsX[] = { posPerso.x, posPerso.x + posPerso.w / 2, posPerso.x + posPerso.w,
+                      posPerso.x, posPerso.x, posPerso.x + posPerso.w / 2,
+                      posPerso.x + posPerso.w, posPerso.x + posPerso.w };
+    int pointsY[] = { posPerso.y, posPerso.y, posPerso.y,
+                      posPerso.y + posPerso.h / 2, posPerso.y + posPerso.h,
+                      posPerso.y + posPerso.h, posPerso.y + posPerso.h,
+                      posPerso.y + posPerso.h / 2 };
+
+    for (int i = 0; i < 8; i++) {
+        SDL_Color color = GetPixel(backgroundMasque, pointsX[i], pointsY[i]);
+        
+        if (color.r == 0 && color.g == 0 && color.b == 0) {
+            return 1; // Collision detected
+        }
+    }
+
+    return 0; // No collision detected
+}
+
+
 
 
 
