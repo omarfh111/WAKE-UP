@@ -6,9 +6,8 @@
 enum state {
   idle,
   walk,
+  walk2,
   jump,
-  attack,
-  death,
 };
 typedef struct {
   int health;
@@ -20,17 +19,16 @@ typedef struct {
   SDL_Rect sprite;
   enum state state;
   int d; 
-  SDL_Surface *image;
+  SDL_Surface * image;
   int sprite_num;
 }perso;
 
-void init_perso(perso *p);
-void afficher_perso(perso p, SDL_Surface *screen);
-void afficher_score_vie(perso p, SDL_Surface *screen, int n);
-void animer_perso(perso *p);
-void move_perso(perso *p);
-void saut_perso(perso *p);
-void attack_perso(perso *p);
-void player_limite(perso *p, SDL_Surface *screen);
+void init_perso(perso * p);
+void afficher_perso(perso p, SDL_Surface * screen);
+void afficher_score_vie(perso p, SDL_Surface * screen, int n);
+void animer_perso(perso * p);
+void move_perso(perso * p);
+void saut_perso(perso * p);
+void player_limite(perso * p, SDL_Surface * screen);
 
 #endif
