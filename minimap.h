@@ -26,5 +26,8 @@ void DisplayMinimap(Minimap *minimap, SDL_Surface *screen);
 
 void FreeMinimap(Minimap *minimap);
 
+SDL_Color GetPixel(SDL_Surface *pSurface,int x,int y);
+int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso)
+
 #endif /* MINIMAP_H */
 
