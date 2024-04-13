@@ -137,6 +137,14 @@ int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso)
     return 0; // No collision detected
 }
 
+void affichertemps(int temps)
+{
+    int temps_ecoule = (SDL_GetTicks() - temps) / 1000; // Convert milliseconds to seconds
+    int temps_restant = temps - temps_ecoule;
+    printf("Elapsed time: %d seconds\nRemaining time: %d seconds\n", temps_ecoule, temps_restant);
+}
+
+
 
 
 
