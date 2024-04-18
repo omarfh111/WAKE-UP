@@ -1,6 +1,6 @@
 #include <SDL/SDL_image.h>
 
-void InitializeMinimap(Minimap *minimap, SDL_Surface *screen) {
+void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, int minimapHeight) {
     minimap->miniatureImage = IMG_Load(".jpg");
     minimap->playerImage = IMG_Load(".png");
     minimap->enemyImage = IMG_Load(".png");
@@ -9,20 +9,19 @@ void InitializeMinimap(Minimap *minimap, SDL_Surface *screen) {
     if (!minimap->miniatureImage || !minimap->playerImage ||
         !minimap->enemyImage || !minimap->puzzleImage) {
         printf("Failed to load one or more images: %s\n", IMG_GetError());
-     
+        return; 
     }
 
-   
-    minimap->miniaturePosition.x = ;
-    minimap->miniaturePosition.y = ;
-    minimap->playerPosition.x = ;
-    minimap->playerPosition.y = ;
-    minimap->enemyPosition.x = ;
-    minimap->enemyPosition.y = ;
-    minimap->puzzlePosition.x = ;
-    minimap->puzzlePosition.y = ;
-
     
+    minimap->miniaturePosition.x = 10;
+    minimap->miniaturePosition.y = 10;
+    minimap->playerPosition.x = minimapWidth / 4;
+    minimap->playerPosition.y = minimapHeight / 4;
+    minimap->enemyPosition.x = minimapWidth / 2;
+    minimap->enemyPosition.y = minimapHeight / 2;
+    minimap->puzzlePosition.x = minimapWidth * 3 / 4;
+    minimap->puzzlePosition.y = minimapHeight * 3 / 4;
+
     SDL_BlitSurface(minimap->miniatureImage, NULL, screen, &minimap->miniaturePosition);
     SDL_BlitSurface(minimap->playerImage, NULL, screen, &minimap->playerPosition);
     SDL_BlitSurface(minimap->enemyImage, NULL, screen, &minimap->enemyPosition);
@@ -30,6 +29,7 @@ void InitializeMinimap(Minimap *minimap, SDL_Surface *screen) {
 
     SDL_Flip(screen);
 }
+
 
 
 void UpdateMinimap(Minimap *minimap, SDL_Rect playerAbsolutePosition, SDL_Rect camera, int resizingFactor) {
@@ -102,6 +102,8 @@ void FreeMinimap(Minimap *minimap) {
     minimap->puzzleImage = NULL;
 }
 
+
+//de l'atelier
 SDL_Color GetPixel(SDL_Surface *pSurface,int x,int y) 
 { SDL_Color color; Uint32 col=0; 
 //Determine position 
@@ -137,12 +139,48 @@ int CollisionParfaite(SDL_Surface *backgroundMasque, SDL_Rect posPerso)
     return 0; // No collision detected
 }
 
-void affichertemps(int temps)
-{
-    int temps_ecoule = (SDL_GetTicks() - temps) / 1000; // Convert milliseconds to seconds
-    int temps_restant = temps - temps_ecoule;
-    printf("Elapsed time: %d seconds\nRemaining time: %d seconds\n", temps_ecoule, temps_restant);
+
+
+
+void afficherTempsLevel(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *font) {
+    int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000; // Convert milliseconds to seconds
+    int temps_restant = dureeTotale - temps_ecoule;
+    char tempsText[100];
+    
+    if (temps_restant <= 0) {
+        sprintf(tempsText, "Level Time: %d seconds", temps_ecoule);
+    } else {
+        sprintf(tempsText, "Level Time: %d seconds\nRemaining Time: %d seconds", temps_ecoule, temps_restant);
+    }
+    
+    SDL_Color textColor = { 255, 255, 255 }; // White color
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, tempsText, textColor);
+    SDL_Rect textRect = { 10, 10, 0, 0 }; // Position to render the text
+    
+    SDL_BlitSurface(textSurface, NULL, screen, &textRect); // Blit text onto the screen
+    SDL_FreeSurface(textSurface); // Free the text surface
 }
+
+// Function to calculate and display the remaining time for a puzzle
+void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *font) {
+    int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000; 
+    int temps_restant = dureeTotale - temps_ecoule;
+    char tempsText[100];
+    
+    if (temps_restant <= 0) {
+        sprintf(tempsText, "Puzzle Time: %d seconds", temps_ecoule);
+    } else {
+        sprintf(tempsText, "Remaining Puzzle Time: %d seconds", temps_restant);
+    }
+    
+    SDL_Color textColor = { 255, 255, 255 }; // White color
+    SDL_Surface *textSurface = TTF_RenderText_Solid(font, tempsText, textColor);
+    SDL_Rect textRect = { 10, 50, 0, 0 }; // Position to render the text
+    
+    SDL_BlitSurface(textSurface, NULL, screen, &textRect); // Blit text onto the screen
+    SDL_FreeSurface(textSurface); // Free the text surface
+}
+
 
 
 
