@@ -2,9 +2,9 @@
 
 typedef enum
 {
-    WAITING;  
-    FOLLOWING; 
-    ATTACKING;  
+    WAITING,
+    FOLLOWING,
+    ATTACKING,
 } states;
 
 typedef struct
@@ -19,7 +19,7 @@ typedef struct
     int x;               
     int y;                
     states current_state; 
-    int vision_range;    
+    int vision_range;   
 } enemy;
 
 void initEnemy(enemy *e);
@@ -30,6 +30,6 @@ int collisionBB(SDL_Rect player, SDL_Rect enemyy, enemy *e);
 void updateEnemy(enemy *e, SDL_Rect posPlayer);
 float distance(SDL_Rect player, SDL_Rect enemy);
 void updateEnemyState(enemy *e, int distEP);
-void liberEnemy(enemy e);
+
 
 #endif
