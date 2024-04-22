@@ -10,6 +10,7 @@ b->imgp.x=0;
 b->imgp.y=0;
 b->imgs.x=0;
 b->imgs.y=200;
+b->scrollingspeed=0;
 b->imgs.w=1000;
 b->imgs.h=800;
 b->camerapos.x=0;
@@ -19,7 +20,9 @@ void afficherbg(bg *b, SDL_Surface *screen){
 SDL_BlitSurface(b->img, &b->imgs, screen, &b->imgp);
 
 }
-void scrolling(bg *b, int direction, int dx, int dy){
+void scrolling(bg *b, int direction, int dx, int dy,float speed){
+dx*=speed;
+dy*=speed;
 if (direction == 0) {
         // Scroll right
         b->imgs.x += dx;

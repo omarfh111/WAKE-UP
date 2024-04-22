@@ -5,9 +5,12 @@
 #include <SDL/SDL_mixer.h>
 #include "perso.h"
 #include "background.h"
+#include "enemy.h"
+#include "constants.h"
 void main(){
 bg bg;
 perso p1;
+enemy e;
 int q=1;
 int scrollLeft = 0; // Flag for left scrolling
 int scrollRight = 0; // Flag for right scrolling
@@ -18,6 +21,7 @@ SDL_Init(SDL_INIT_EVERYTHING);
 TTF_Init();
 SDL_Surface * screen = SDL_SetVideoMode(1000, 800, 32, SDL_SWSURFACE);
 init_perso( & p1); 
+initEnemy(&e);
 SDL_Event event;
 initbg(&bg);
 
@@ -58,10 +62,10 @@ initbg(&bg);
                         
                         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	   if (scrollLeft) {
-            scrolling(&bg, 1, 10, 0); // Scroll left continuously
+            scrolling(&bg, 1, p1.pos.x, 0,0.01); // Scroll left continuously
         }
         if (scrollRight) {
-            scrolling(&bg, 0, 10, 0); // Scroll right continuously
+            scrolling(&bg, 0, p1.pos.x, 0,0.01); // Scroll right continuously
         }
         // Display background
         afficherbg(&bg, screen);
@@ -70,9 +74,21 @@ initbg(&bg);
 		    afficher_perso(p1, screen);
 		    afficher_score_vie(p1, screen, 0);
 		    animer_perso( & p1);
+		    drawEnemy(screen,e);
 		    move_perso( & p1);
 		    saut_perso( & p1);
+		    //if((bg.imgs.x==50) || (bg.imgs.x==5000)){ 
 		    player_limite(&p1,screen);
+		    updateEnemy(&e, p1.pos);
+		    SDL_Flip(screen);
+		  //  printf("Position du personnage (x): %d\n", p1.pos.x);
+		    printf("Position du personnage (x): %d\n", bg.imgs.x);
+		    if (collisionBB(p1.pos,e.img_pos,&e)){
+           		 p1.vie -= 10;}
+            	if (p1.score <= 0) {
+                	printf("Game Over\n");
+              		  q = 0;}
+		   
 		    
 		    
 		     // Clear screen

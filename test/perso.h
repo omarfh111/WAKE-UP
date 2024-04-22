@@ -15,7 +15,7 @@ typedef struct {
   int health;
   int score;
   int vie;
-  int speed;
+  float speed;
   int jump;
   SDL_Rect pos;
   SDL_Rect sprite;
@@ -23,6 +23,7 @@ typedef struct {
   int d; 
   SDL_Surface * image;
   int sprite_num;
+  double scale;
 }perso;
 
 void init_perso(perso * p);

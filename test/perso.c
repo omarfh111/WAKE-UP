@@ -1,26 +1,27 @@
 #include "perso.h"
 #include <stdio.h>
-
-#define ACCELERATION 1.0
+#define ACCELERATION 0.001
 #define LIM_LEFT 50
-#define LIM_RIGHT 500	
-//int LIM_RIGHT1 = 500; // Definition
+#define LIM_RIGHT 150	
 
 void init_perso(perso * p) {
   ( *p).health = 0;
-  ( *p).score = 50;
+  ( *p).score = 1000;
   ( *p).vie = 100;
   ( *p).d = 1;
   ( *p).jump = 0;
-  ( *p).pos.x = 500;
+  ( *p).pos.x = 50;
   ( *p).pos.y = 600;
   ( *p).sprite.x = 0;
   ( *p).sprite.y = 0;
+  ( *p).sprite.w = ( *p).image->w * (*p).scale;
+  ( *p).sprite.h = ( *p).image->h * (*p).scale;
   ( *p).state = idle;
   ( *p).sprite_num = 0;
+  (*p).scale = 7000;
   ( *p).image = IMG_Load("spritesheet.png");
-  ( *p).pos.w = ( *p).image->w/4;
-  ( *p).pos.h = ( *p).image->h/4;
+  ( *p).pos.w = ( *p).image->w /4;
+  ( *p).pos.h = ( *p).image->h /4;
 }
 
 void afficher_perso(perso p, SDL_Surface * screen) {
@@ -29,7 +30,6 @@ void afficher_perso(perso p, SDL_Surface * screen) {
 
 void afficher_score_vie(perso p, SDL_Surface * screen, int n) {
   if (p.pos.x + p.pos.w > 0) {
-
     TTF_Font * font = TTF_OpenFont("fonts/score.ttf", 25);
     SDL_Color color = {
       255 * n,
@@ -38,9 +38,10 @@ void afficher_score_vie(perso p, SDL_Surface * screen, int n) {
     };
     SDL_Surface * text, * s;
     SDL_Rect pos = p.pos;
+    pos.x+=10;
     pos.y -= 10;
     s = SDL_CreateRGBSurface(0, p.pos.w * p.vie / 100, 10, 32, 0, 0, 0, 10);
-    SDL_FillRect(s, NULL, SDL_MapRGB(s -> format, 100 + 155 * n, 0, 0));
+    SDL_FillRect(s, NULL, SDL_MapRGB(s -> format,255, 0, 0));
     char ch[15];
     sprintf(ch, "%d", p.score);
     text = TTF_RenderText_Solid(font, ch, color);
@@ -107,15 +108,9 @@ void saut_perso(perso * p) {
   }
 }
 
-void player_limite(perso *p, SDL_Surface *screen /*,int LIM_RIGHT1*/) {
-    if (p->state != 0) {
-        if (p->pos.x < LIM_LEFT) 
-            p->pos.x = LIM_LEFT;
-        if (p->pos.x > screen->w - LIM_RIGHT) 
-            p->pos.x = screen->w - LIM_RIGHT;
-       /* if (p->pos.x > 5200) 
-            LIM_RIGHT1=800;
-            p->pos.x = screen->w - LIM_RIGHT1;*/
+void player_limite(perso * p,SDL_Surface * screen){
+    if(( *p).state !=0){
+       if(( *p).pos.x < LIM_LEFT)( *p).pos.x =LIM_LEFT;
+       if(( *p).pos.x > ( * screen).w - LIM_RIGHT)( *p).pos.x =( * screen).w - LIM_RIGHT;
     }
 }
-
