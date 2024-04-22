@@ -1,10 +1,14 @@
+#include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include <stdlib.h>
+#include "minimap.h"
 
 void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, int minimapHeight) {
-    minimap->miniatureImage = IMG_Load(".jpg");
-    minimap->playerImage = IMG_Load(".png");
-    minimap->enemyImage = IMG_Load(".png");
-    minimap->puzzleImage = IMG_Load(".png");
+    minimap->miniatureImage = IMG_Load("back.png");
+    minimap->playerImage = IMG_Load("red.png");
+    minimap->enemyImage = IMG_Load("blue.png");
+    minimap->puzzleImage = IMG_Load("yellow.png");
 
     if (!minimap->miniatureImage || !minimap->playerImage ||
         !minimap->enemyImage || !minimap->puzzleImage) {
@@ -12,7 +16,6 @@ void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, 
         return; 
     }
 
-    
     minimap->miniaturePosition.x = 10;
     minimap->miniaturePosition.y = 10;
     minimap->playerPosition.x = minimapWidth / 4;
@@ -21,72 +24,54 @@ void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, 
     minimap->enemyPosition.y = minimapHeight / 2;
     minimap->puzzlePosition.x = minimapWidth * 3 / 4;
     minimap->puzzlePosition.y = minimapHeight * 3 / 4;
-
-    SDL_BlitSurface(minimap->miniatureImage, NULL, screen, &minimap->miniaturePosition);
-    SDL_BlitSurface(minimap->playerImage, NULL, screen, &minimap->playerPosition);
-    SDL_BlitSurface(minimap->enemyImage, NULL, screen, &minimap->enemyPosition);
-    SDL_BlitSurface(minimap->puzzleImage, NULL, screen, &minimap->puzzlePosition);
-
-    SDL_Flip(screen);
 }
 
 
 
-void UpdateMinimap(Minimap *minimap, SDL_Rect playerAbsolutePosition, SDL_Rect camera, int resizingFactor) {
-    
-    //playerAbsolutePosition: pos player  camera: var concern scrolling  resizingFactor % 9adeh tsagher el entity
-    
+
+void UpdateMinimap(Minimap *minimap, SDL_Rect playerAbsolutePosition, int resizingFactor, int screenWidth, int screenHeight) {
     int playerXOnMap, playerYOnMap;
-    int enemyXOnMap, enemyYOnMap;
-    int puzzleXOnMap, puzzleYOnMap;
 
-   
-    playerXOnMap = (playerAbsolutePosition.x + camera.x) * resizingFactor / 100;
-    playerYOnMap = (playerAbsolutePosition.y + camera.y) * resizingFactor / 100;
+    // Calculate the player's position on the minimap based on resizing factor and screen dimensions
+    playerXOnMap = (playerAbsolutePosition.x * minimap->miniaturePosition.w) / screenWidth;
+    playerYOnMap = (playerAbsolutePosition.y * minimap->miniaturePosition.h) / screenHeight;
 
-   
-    enemyXOnMap = (minimap->enemyPosition.x - camera.x) * resizingFactor / 100;
-    enemyYOnMap = (minimap->enemyPosition.y - camera.y) * resizingFactor / 100;
-
-
-    puzzleXOnMap = minimap->puzzlePosition.x * resizingFactor / 100;
-    puzzleYOnMap = minimap->puzzlePosition.y * resizingFactor / 100;
-
-    
+    // Update the player's position on the minimap
     minimap->playerPosition.x = playerXOnMap;
     minimap->playerPosition.y = playerYOnMap;
-
-    minimap->enemyPosition.x = enemyXOnMap;
-    minimap->enemyPosition.y = enemyYOnMap;
-
-    minimap->puzzlePosition.x = puzzleXOnMap;
-    minimap->puzzlePosition.y = puzzleYOnMap;
 }
+
+
+
+
+
+
+
+
 
 void DisplayMinimap(Minimap *minimap, SDL_Surface *screen) {
-    
-    //background minimap black
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+    // Set black color as transparent for minimap background
+    SDL_SetColorKey(minimap->miniatureImage, SDL_SRCCOLORKEY, SDL_MapRGB(minimap->miniatureImage->format, 0, 0, 0));
 
-	//affiche minimap backgrd
+    // Blit the minimap background
     SDL_BlitSurface(minimap->miniatureImage, NULL, screen, &minimap->miniaturePosition);
 
-    // afficher player
+    // Blit player on minimap
     SDL_BlitSurface(minimap->playerImage, NULL, screen, &minimap->playerPosition);
-
-    //afficher enemy si existe
+/*
+    // Blit enemy if it exists
     if (minimap->enemyImage != NULL) {
         SDL_BlitSurface(minimap->enemyImage, NULL, screen, &minimap->enemyPosition);
-    }
+    }*/
 
-    //afficher puzzle si exsiste
-    if (minimap->puzzleImage != NULL) {
-        SDL_BlitSurface(minimap->puzzleImage, NULL, screen, &minimap->puzzlePosition);
-    }
+    // Blit puzzle if it exists
+   /* if (minimap->puzzleImage != NULL) {
+        SDL_BlitSurface(minimap->puzzleImage, NULL, screen, &minimap->puzzlePosition); 
+    } */
 
-    
     SDL_Flip(screen);
 }
+
 
 void FreeMinimap(Minimap *minimap) {
     SDL_FreeSurface(minimap->miniatureImage);
@@ -180,11 +165,4 @@ void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, T
     SDL_BlitSurface(textSurface, NULL, screen, &textRect); // Blit text onto the screen
     SDL_FreeSurface(textSurface); // Free the text surface
 }
-
-
-
-
-
-
-
 
