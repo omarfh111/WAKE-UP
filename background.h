@@ -18,6 +18,8 @@ SDL_Rect imgs;
 SDL_Rect imgp;
 SDL_Surface *img;
 }image;
+void imgheart2(image *i);
+void musicLoad1(Mix_Music *music);
 void initbg(bg *b);
 void afficherbg(bg *b, SDL_Surface *screen);
 void animerbg(SDL_Surface *screen,SDL_Surface *img);
