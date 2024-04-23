@@ -4,8 +4,6 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 #include "background.h"
-
-
 #define SCREEN_WIDTH 1000
 #define SCREEN_HEIGHT 800
 
@@ -23,11 +21,14 @@ return 1;
 bg background;
 initbg(&background);
 image heart;
+image heart2;
 imgheart(&heart);
+imgheart2(&heart2);
 Mix_Music *bgMusic;
 musicLoad1(bgMusic);
 int quit = 0;
 int scrollingRight = 0, scrollingLeft = 0, scrollingUp = 0, scrollingDown = 0;
+int splitScreen = 0;
 SDL_Event event;
 while (!quit) 
 {
@@ -52,6 +53,9 @@ scrollingUp = 1;
 break;
 case SDLK_DOWN:
 scrollingDown = 1;
+break;
+case SDLK_s:
+splitScreen = !splitScreen;
 break;
 }
 }
@@ -91,8 +95,17 @@ if (scrollingDown)
 scrolling(&background, 3, 0, 10); 
 }
 SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-afficherbg(&background, screen);
+if(splitScreen) 
+{
+splitscreen(screen, &background);
 afficherheart(&heart, screen);
+afficherheart(&heart2, screen);
+} 
+else 
+{
+afficherbg(&background, screen); 
+afficherheart(&heart, screen);
+}
 SDL_Flip(screen);
 SDL_Delay(10);
 }
