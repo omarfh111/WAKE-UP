@@ -23,6 +23,15 @@ i->imgs.y=10;
 i->imgs.w=100;
 i->imgs.h=100;
 }
+void imgheart2(image *i){
+i->img= IMG_Load("heart.png");
+i->imgp.x=500;
+i->imgp.y=0;
+i->imgs.x=10;
+i->imgs.y=10;
+i->imgs.w=100;
+i->imgs.h=100;
+}
 void afficherheart(image *i, SDL_Surface *screen){
 SDL_BlitSurface(i->img, &i->imgs, screen, &i->imgp);
 }
