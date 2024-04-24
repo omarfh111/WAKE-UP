@@ -5,21 +5,22 @@
 #include <SDL/SDL_mixer.h>
 #include "background.h"
 
-void initbg(bg *b){
-b->img= IMG_Load("screen1.jpg");
-b->imgp.x=0;
-b->imgp.y=0;
-b->imgs.x=0;
-b->imgs.y=200;
-b->imgs.w=1000;
-b->imgs.h=800;
+void initbg(bg *b, char *filename) {
+b->img = IMG_Load(filename);
+b->imgp.x = 0;
+b->imgp.y = 0;
+b->imgs.x = 0;
+b->imgs.y = 200;
+b->imgs.w = 1000;
+b->imgs.h = 800;
 }
+
 void imgheart(image *i){
 i->img= IMG_Load("heart.png");
 i->imgp.x=0;
 i->imgp.y=0;
-i->imgs.x=10;
-i->imgs.y=10;
+i->imgs.x=0;
+i->imgs.y=0;
 i->imgs.w=100;
 i->imgs.h=100;
 }
@@ -53,6 +54,20 @@ return;
 }
 Mix_PlayMusic(music, -1);
 Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+}
+void soundeffect(Mix_Chunk *sound) {
+if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) == -1) {
+printf("%s\n", Mix_GetError());
+return;
+}
+sound = Mix_LoadWAV("jumpf.wav");
+if (sound == NULL) {
+printf("Unable to load sound effect. Error: %s\n", Mix_GetError());
+return;
+}
+Mix_VolumeChunk(sound, MIX_MAX_VOLUME / 2);
+Mix_PlayChannel(-1, sound, 0);
+     
 }
 
 void scrolling(bg *b, int direction, int dx, int dy)
