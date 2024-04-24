@@ -3,6 +3,8 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+//extern int LIM_RIGHT; // Declaration
+
 enum state {
   idle,
   walk,
@@ -13,7 +15,7 @@ typedef struct {
   int health;
   int score;
   int vie;
-  int speed;
+  float speed;
   int jump;
   SDL_Rect pos;
   SDL_Rect sprite;
@@ -21,6 +23,7 @@ typedef struct {
   int d; 
   SDL_Surface * image;
   int sprite_num;
+  double scale;
 }perso;
 
 void init_perso(perso * p);
@@ -29,6 +32,6 @@ void afficher_score_vie(perso p, SDL_Surface * screen, int n);
 void animer_perso(perso * p);
 void move_perso(perso * p);
 void saut_perso(perso * p);
-void player_limite(perso * p, SDL_Surface * screen);
+void player_limite(perso * p, SDL_Surface * screen/*, int LIM_RIGHT1*/);
 
 #endif
