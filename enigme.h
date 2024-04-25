@@ -1,23 +1,68 @@
-#ifndef ENIGME_H_INCLUDED
-#define ENIGME_H_INCLUDED
-#include <SDL/SDL_ttf.h>
+#ifndef FONCTION_H
+#define FONCTION_H
+
 #include <SDL/SDL.h>
+
+#include <SDL/SDL_image.h>  
+#include <SDL/SDL_mixer.h>  
+
+#define SCREEN_H 410 
+#define SCREEN_W 640
+
+
+typedef struct 
+{ 
+  char *url ; 
+ SDL_Rect    pos_img_affiche;
+ SDL_Rect      pos_img_ecran ;
+ SDL_Surface    *img ;
+
+}image; 
+
 typedef struct {
-     char question[100];
-     char reponse1[100];
-     char reponse2[100];
-     char reponse3[100];
-    SDL_Rect questionl;
-    SDL_Rect reponsel;
-    SDL_Rect textl;
-    TTF_Font *font;
-    SDL_Surface* screen;
-    SDL_Color textColor;
-    SDL_Color textg;
-    SDL_Color texty;
-    SDL_Color textr;
-} Enigme;
-void afficherEnigme(Enigme e, SDL_Surface* screen, TTF_Font* font, SDL_Color textColor);
-void genererEnigme(Enigme* p, char* nomfichier);
-void animerEnigme(Enigme * e);
-#endif // ENIGME_H_INCLUDED
+    FILE* f;
+    char question[400];
+    char r1[50];
+    char r2[50];
+    char r3[50];
+    int numbr;
+    char x[50];
+    image images[3];
+} enigme;
+
+
+void afficherEnigme(SDL_Surface *screen, enigme e);
+
+
+void initialiser_imageBACK(image *image) ; 
+void initialiser_imageBOUTON1(image *image) ; 
+void initialiser_imageBOUTON2(image *image) ; 
+
+void afficher_imageBTN1(SDL_Surface *screen , image image ) ;
+void afficher_imageBTN2(SDL_Surface *screen , image image) ;
+
+void afficher_imageBMP(SDL_Surface *screen , image image) ; 
+void genererEnigme(char* filename, enigme* e);
+
+void animate(SDL_Surface *screen,enigme *e);
+
+void liberer_image(image image) ; 
+
+
+void initialiser_audio(Mix_Music *music) ; 
+void liberer_musique(Mix_Music *music) ;
+
+ 
+#endif 
+
+
+
+
+
+
+
+
+
+
+
+
