@@ -5,7 +5,21 @@
 #define ACCELERATION 1.5
 #define LIM_LEFT 50
 #define LIM_RIGHT 150	
-
+/**
+* @file perso.c
+* @brief Testing Program.
+* @author C Team
+* @version 0.1
+* @date Apr 01, 2015
+*
+* Testing program for perso
+*
+*/
+/**
+* @brief To initialize the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void init_perso(perso * p) {
   ( *p).health = 0;
   ( *p).score = 1000;
@@ -19,24 +33,52 @@ void init_perso(perso * p) {
   ( *p).state = idle;
   ( *p).sprite_num = 0;
 }
+/**
+* @brief To mouve the perso p1 .
+* @param p the perso
+* @return Nothing
+*/
 void init_perso_controls(perso * p) {
   ( *p).keys.left = SDLK_LEFT;
   ( *p).keys.right = SDLK_RIGHT;
   ( *p).keys.jump = KMOD_LCTRL;
 }
+/**
+* @brief To mouve the perso p2 .
+* @param p the perso
+* @return Nothing
+*/
 void init_perso_controls_p2(perso * p) {
   ( *p).keys.left = SDLK_q;
   ( *p).keys.right = SDLK_d;
   ( *p).keys.jump = KMOD_LALT;
 }
+/**
+* @brief To initialize  sprite the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void init_images_perso(perso * p) {
   ( *p).image = IMG_Load("spritesheet.png");
   ( *p).pos.w = ( *p).image->w/4;
   ( *p).pos.h = ( *p).image->h/4;
 }
+/**
+* @brief To show the perso p .
+* @param p the perso
+* @param screen the screen
+* @return Nothing
+*/
 void afficher_perso(perso p, SDL_Surface * screen) {
   SDL_BlitSurface(p.image, & p.sprite, screen, & p.pos);
 }
+/**
+* @brief To initialize the perso p .
+* @param p the perso
+* @param screen the screen
+* @param n the var for detection
+* @return Nothing
+*/
 void afficher_score_vie(perso p, SDL_Surface * screen, int n) {
   if (p.pos.x + p.pos.w > 0) {
 
@@ -65,6 +107,11 @@ void afficher_score_vie(perso p, SDL_Surface * screen, int n) {
     s = NULL;
   }
 }
+/**
+* @brief To animate the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void animer_perso(perso * p) {
 
   (*p).sprite.w = (*p).image->w / 4;
@@ -76,6 +123,11 @@ void animer_perso(perso * p) {
   (*p).sprite.y = ( *p).sprite.h * ( *p).state;
   //if (( *p).d==2) ( *p).sprite.y+= ( *p).sprite.h * 3;
 }
+/**
+* @brief To mouve the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void move_perso(perso * p) {
   Uint8 * keystate = SDL_GetKeyState(NULL);
   if (keystate[( *p).keys.right]) {
@@ -102,6 +154,11 @@ if (keystate[( *p).keys.right])( *p).pos.x += ( *p).speed;
    else
    (*p).pos.x-=2*(*p).jump*(*p).jump;
 }
+/**
+* @brief To jump the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void saut_perso(perso * p) {
   SDLMod modstate = SDL_GetModState();
   if (modstate == 4096 + ( *p).keys.jump)
@@ -117,6 +174,11 @@ void saut_perso(perso * p) {
     else( *p).jump = 0;
   }
 }
+/**
+* @brief To lim the perso p .
+* @param p the perso
+* @return Nothing
+*/
 void player_limite(perso * p, SDL_Surface * screen) {
   if (( *p).state != 0) {
     if (( *p).pos.x < LIM_LEFT)( *p).pos.x = LIM_LEFT;
