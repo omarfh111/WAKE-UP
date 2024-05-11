@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['minimap_9',['Minimap',['../structMinimap.html',1,'']]]
+  ['minimap_27',['Minimap',['../structMinimap.html',1,'']]]
 ];

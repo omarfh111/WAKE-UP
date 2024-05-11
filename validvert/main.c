@@ -1,3 +1,14 @@
+/**
+* @file main.c
+* @brief Testing Program.
+* @author wake up
+* @version 0.1
+* @date 5,2,2015
+*
+* test main.c
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
@@ -9,6 +20,7 @@
 #include "enemy.h"
 #include "constants.h"
 #include "minimap.h"
+
 
 void main(){
     bg bg,mask;
@@ -28,7 +40,7 @@ void main(){
     
     
     int tempsDebut = SDL_GetTicks(); 
-    int dureeTotale = 60 * 1000; 
+    int dureeTotale = 180 * 1000; 
     SDL_Surface * screen = SDL_SetVideoMode(1000, 800, 32, SDL_SWSURFACE);
     init_perso(&p1); 
     initEnemy(&e);

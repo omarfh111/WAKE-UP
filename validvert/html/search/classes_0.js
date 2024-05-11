@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bg_6',['bg',['../structbg.html',1,'']]]
+  ['bg_24',['bg',['../structbg.html',1,'']]]
 ];

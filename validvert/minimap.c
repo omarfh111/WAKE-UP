@@ -1,8 +1,22 @@
+/**
+* @file minimap.c
+*/
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include <stdlib.h>
 #include "minimap.h"
+
+
+/**
+* @brief pour intialiser minimap
+* @param minimap variable de structure parametre
+* @param screen ecran d'affichage
+* @param minimapWidth minimapHeight longeur et largeur du minimap
+* @return no return
+*/
+
 
 void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, int minimapHeight) {
     minimap->miniatureImage = IMG_Load("back.png");
@@ -27,7 +41,14 @@ void InitializeMinimap(Minimap *minimap, SDL_Surface *screen, int minimapWidth, 
 }
 
 
-
+/**
+* @brief pour faire mise a jour des positions des entites sur minimap
+* @param minimap variable de structure parametre
+* @param playerAbsolutePosition c'est la position du joueur sur ecran(sure background)
+* @param minimapWidth minimapHeight longeur et largeur du minimap
+* @param resizingFactor le redefinition de la taille des entites sur minimap selon une valeur defini
+* @return no return
+*/
 
 void UpdateMinimap(Minimap *minimap, SDL_Rect playerAbsolutePosition, int resizingFactor, int screenWidth, int screenHeight) {
     int playerXOnMap, playerYOnMap;
@@ -45,10 +66,12 @@ void UpdateMinimap(Minimap *minimap, SDL_Rect playerAbsolutePosition, int resizi
 
 
 
-
-
-
-
+/**
+* @brief affichage minimap sur ecran
+* @param minimap variable de structure parametre
+* @param screen ecran d'affichage
+* @return no return
+*/
 
 void DisplayMinimap(Minimap *minimap, SDL_Surface *screen) {
     // Set black color as transparent for minimap background
@@ -73,6 +96,11 @@ void DisplayMinimap(Minimap *minimap, SDL_Surface *screen) {
     SDL_Flip(screen);
 }
 
+/**
+* @brief liberation 
+* @param minimap variable de structure parametre
+* @return no return
+*/
 
 void FreeMinimap(Minimap *minimap) {
     SDL_FreeSurface(minimap->miniatureImage);
@@ -99,7 +127,14 @@ memcpy(&col ,pPosition ,pSurface->format->BytesPerPixel);
  SDL_GetRGB(col,pSurface->format, &color.r, &color.g, &color.b);
   return (color);
   }
-  
+ 
+ 
+/**
+* @brief detection collision character avec obstacles horizontale 
+* @param backgroundmasque variable contenant la masque des obstacles
+* @param posPerso position du personnage sur background
+* @return 1 si collision 0 si non collision
+*/  
   
 int CollisionHorizontale(SDL_Surface *backgroundMasque, SDL_Rect posPerso) {
     // Coordinates of the 8 points around the character
@@ -121,6 +156,12 @@ int CollisionHorizontale(SDL_Surface *backgroundMasque, SDL_Rect posPerso) {
 
     return 0; 
 }
+/**
+* @brief detection collision character avec obstacles vertical 
+* @param backgroundmasque variable contenant la masque des obstacles
+* @param posPerso position du personnage sur background
+* @return 1 si collision 0 si non collision
+*/ 
 
 int CollisionVerticale(SDL_Surface *backgroundMasque, SDL_Rect posPerso) {
 
@@ -142,7 +183,14 @@ int CollisionVerticale(SDL_Surface *backgroundMasque, SDL_Rect posPerso) {
     return 0; 
 }
 
-
+/**
+* @brief affichage de temps du niveau
+* @param tempsDebut le moment du lancement de l'enigme
+* @param dureeTotale duree de l'enigme
+* @param screen ecran d'affichage
+* @param font font du texte du temps
+* @return no return
+*/ 
 
 void afficherTempsLevel(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *font) {
     int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000; 
@@ -164,10 +212,14 @@ void afficherTempsLevel(int tempsDebut, int dureeTotale, SDL_Surface *screen, TT
     SDL_FreeSurface(textSurface); 
 }
 
-
-
-
-
+/**
+* @brief affichage de temps du niveau
+* @param tempsDebut le moment du lancement du niveau
+* @param dureeTotale duree du niveau
+* @param screen ecran d'affichage
+* @param font font du texte du temps
+* @return no return
+*/ 
 void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *font) {
     int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000; 
     int temps_restant = dureeTotale - temps_ecoule;
@@ -188,6 +240,14 @@ void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, T
 }
 
 
+
+/**
+* @brief animation minimap
+* @param m variable de type minimap
+* @param dotImage1 image 1 pour animation de l'enigme
+* @param dotImage2 image 2 pour animation de l'enigme
+* @return no return
+*/ 
 void animerMinimap(Minimap *m, SDL_Surface *dotImage1, SDL_Surface *dotImage2) {
 
     SDL_Rect dotRect = { 900, 100, dotImage1->w, dotImage1->h };
