@@ -2,9 +2,10 @@
 #define FONCTION_H
 
 #include <SDL/SDL.h>
-
-#include <SDL/SDL_image.h>  
-#include <SDL/SDL_mixer.h>  
+/*--------ETAPE 0 DECLARATION DU BIBLIOTHEQUE SDL ---------------*/
+#include <SDL/SDL_image.h>  // pour manipuler des image 
+#include <SDL/SDL_mixer.h>  // pour manipuler des audio 
+/*-------------------------------------------------------------------*/
 
 #define SCREEN_H 410 
 #define SCREEN_W 640
@@ -33,7 +34,9 @@ typedef struct {
 
 void afficherEnigme(SDL_Surface *screen, enigme e);
 
+// definition des fenetre des fonction 
 
+//definition pour la manipulation de l'image 
 void initialiser_imageBACK(image *image) ; 
 void initialiser_imageBOUTON1(image *image) ; 
 void initialiser_imageBOUTON2(image *image) ; 
@@ -49,6 +52,7 @@ void animate(SDL_Surface *screen,enigme *e);
 void liberer_image(image image) ; 
 
 
+//definition pour la manipulation de l'audio 
 void initialiser_audio(Mix_Music *music) ; 
 void liberer_musique(Mix_Music *music) ;
 
