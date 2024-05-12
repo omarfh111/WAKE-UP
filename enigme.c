@@ -6,6 +6,16 @@
 #include <SDL/SDL_ttf.h>     
 #include "enigme.h" 
 #include <time.h>
+/**
+* @file enigme.c
+* @brief Testing My Program.
+* @author Hamza Fhaiel
+* @version 1.2
+* @date may 12 2024
+* Testing enigme.c file included to the main.c
+* 
+*
+*/
 void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *funt) {
     int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000;
     int temps_restant = dureeTotale - temps_ecoule;
@@ -240,7 +250,7 @@ SDL_FreeSurface(r3surface);
 
 void genererEnigme(char* filename, enigme* e) {
   FILE* fp = fopen(filename, "r");
-    int random_question_index = rand() % 12 + 1;
+    int random_question_index = rand() % 18 + 1;
     int current_question_index = 0;
     char line[500];
  	
