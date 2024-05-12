@@ -5,8 +5,25 @@
 #include <SDL/SDL_mixer.h>   
 #include <SDL/SDL_ttf.h>     
 #include "enigme.h" 
-
-
+#include <time.h>
+void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *funt) {
+    int temps_ecoule = (SDL_GetTicks() - tempsDebut) / 1000;
+    int temps_restant = dureeTotale - temps_ecoule;
+    char tempsText[100];
+   
+    if (temps_restant <= 0) {
+        sprintf(tempsText, "Puzzle Time: %d seconds", temps_ecoule);
+    } else {
+        sprintf(tempsText, "Remaining Puzzle Time: %d seconds", temps_restant);
+    }
+   
+    SDL_Color textColor = { 255, 255, 255 };
+    SDL_Surface *textSurface = TTF_RenderText_Solid(funt, tempsText, textColor);
+    SDL_Rect textRect = { 10, 50, 0, 0 };
+   
+    SDL_BlitSurface(textSurface, NULL, screen, &textRect);
+    SDL_FreeSurface(textSurface);
+}
 
   
 void initialiser_imageBACK(image *image)
@@ -126,7 +143,7 @@ void liberer_musique(Mix_Music *music)
 
 
 
-void afficherEnigme(SDL_Surface* screen, enigme e ) {
+void afficherEnigme(SDL_Surface* screen, enigme e,int tb ) {
     
 
     SDL_Colour text_color;
@@ -162,35 +179,51 @@ void afficherEnigme(SDL_Surface* screen, enigme e ) {
     r1surface = TTF_RenderText_Blended(font, e.r1, text_color);
     r2surface = TTF_RenderText_Blended(font, e.r2, text_color);
     r3surface = TTF_RenderText_Blended(font, e.r3, text_color);
-    
-    
-    questionpos.x=420;
-    questionpos.y=480;
+    questionpos.x = 420;
+    questionpos.y = 480;
+    switch (tb) {
+    case 0:
+        r1pos.x = 70;
+        r1pos.y = 700;
+        r2pos.x = 453;
+        r2pos.y = 700;
+        r3pos.x = 800;
+        r3pos.y = 700;
+        break;
+    case 1:
+        r1pos.x = 800;
+        r1pos.y = 700;
+        r2pos.x = 70;
+        r2pos.y = 700;
+        r3pos.x = 453;
+        r3pos.y = 700;
+        break;
+    case 2:
+        r1pos.x = 453;
+        r1pos.y = 700;
+        r2pos.x = 800;
+        r2pos.y = 700;
+        r3pos.x = 70;
+        r3pos.y = 700;
+        break;
    
-    r1pos.x=70;
-    r1pos.y=700;
+}
 
-    r2pos.x=453;
-    r2pos.y=700;
 
-    r3pos.x=800;
-    r3pos.y=700;
+SDL_BlitSurface(questionsurface, NULL, screen, &questionpos);
+SDL_BlitSurface(r1surface, NULL, screen, &r1pos);
+SDL_BlitSurface(r2surface, NULL, screen, &r2pos);
+SDL_BlitSurface(r3surface, NULL, screen, &r3pos);
+
+SDL_Flip(screen);
+
+TTF_CloseFont(font);
+SDL_FreeSurface(questionsurface);
+SDL_FreeSurface(r1surface);
+SDL_FreeSurface(r2surface);
+SDL_FreeSurface(r3surface);
+
     
-  
-    SDL_BlitSurface(questionsurface, NULL, screen, &questionpos);
-    SDL_BlitSurface(r1surface, NULL, screen, &r1pos);
-    SDL_BlitSurface(r2surface, NULL, screen, &r2pos);
-    SDL_BlitSurface(r3surface, NULL, screen, &r3pos);
-    
-   
-    SDL_Flip(screen);
-
-   
-    TTF_CloseFont(font);
-    SDL_FreeSurface(questionsurface);
-    SDL_FreeSurface(r1surface);
-    SDL_FreeSurface(r2surface);
-    SDL_FreeSurface(r3surface);
 }
 
 
