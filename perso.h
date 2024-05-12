@@ -33,7 +33,7 @@ typedef struct {
   double scale;
 }
 perso;
-void init_images_perso(perso * p);
+void init_images_perso(perso * p,char *filename);
 void init_perso(perso * p);
 void init_perso_controls(perso * p);
 void afficher_perso(perso p, SDL_Surface * screen);
