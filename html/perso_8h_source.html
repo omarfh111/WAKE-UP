@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>WAKE-UP:  Fichier source de perso.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">WAKE-UP
+   &#160;<span id="projectnumber">VERSION 1</span>
+   </div>
+   <div id="projectbrief">Ce projet est un jeux SDL1.2 pour tous les ages</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">perso.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _PERSO_H_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _PERSO_H_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SDL/SDL_image.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;SDL/SDL.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;SDL/SDL_ttf.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;controls.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">enum</span> state {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  idle,  </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  walk,  </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  walk2,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  jump   </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structperso.html">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structperso.html#a0598dddec3f59d5e13865fe1b2c566be">   21</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structperso.html#a0598dddec3f59d5e13865fe1b2c566be">health</a>;    </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structperso.html#a49e19e00dfbdcd05d21a5ba7df809708">   22</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structperso.html#a49e19e00dfbdcd05d21a5ba7df809708">score</a>;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structperso.html#ac312a4c1a5a2e37e1731d31f524455bb">   23</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structperso.html#ac312a4c1a5a2e37e1731d31f524455bb">vie</a>;  </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structperso.html#a2330bb4058a3c590424f7b66f0a1d8ca">   24</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structperso.html#a2330bb4058a3c590424f7b66f0a1d8ca">speed</a>;    </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structperso.html#a41362c60ce965d63463fb5fe4aefb519">   25</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structperso.html#a41362c60ce965d63463fb5fe4aefb519">jump</a>; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="structkeymapping.html">keymapping</a> keys;  </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structperso.html#a1702962d93240085dc2dfab4c0d7754f">   27</a></span>&#160;  SDL_Rect <a class="code" href="structperso.html#a1702962d93240085dc2dfab4c0d7754f">pos</a>; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structperso.html#ab2faa1b6593861976ebaf78743c1074b">   28</a></span>&#160;  SDL_Rect <a class="code" href="structperso.html#ab2faa1b6593861976ebaf78743c1074b">sprite</a>;  </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">enum</span> state state; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">int</span> d; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structperso.html#a3bb43b8e820b3ba348b6c96458b39231">   31</a></span>&#160;  SDL_Surface * <a class="code" href="structperso.html#a3bb43b8e820b3ba348b6c96458b39231">image</a>;  </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">int</span> sprite_num;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">double</span> scale;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="structperso.html">perso</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#a85e113caed303126f31c958048e18390">init_images_perso</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#aa652096fe816cd5cf9e54ee8c1312060">init_perso</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#a29517d92c86ad5f8be34382407fe0c68">init_perso_controls</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#a94b273043f51380f95165ff4c0cd5331">afficher_perso</a>(<a class="code" href="structperso.html">perso</a> p, SDL_Surface * screen);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#ae54508e571fca101a985b69e2485697e">afficher_score_vie</a>(<a class="code" href="structperso.html">perso</a> p, SDL_Surface * screen, <span class="keywordtype">int</span> n);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#a337d93a9a067ae0ab5489951a8e06f13">animer_perso</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#a27573244fef1a2d5f14537d7d3f772ed">move_perso</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#aa05909edef8cf8cf3989e5b81efd7413">player_limite</a>(<a class="code" href="structperso.html">perso</a> * p, SDL_Surface * screen);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#abb2113cd5014c2fb1a4def1f6d6ca1a8">saut_perso</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> <a class="code" href="perso_8c.html#af4597e7e9e3c98b7617f316fb47ba9bf">init_perso_controls_p2</a>(<a class="code" href="structperso.html">perso</a> * p);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aperso_8c_html_a27573244fef1a2d5f14537d7d3f772ed"><div class="ttname"><a href="perso_8c.html#a27573244fef1a2d5f14537d7d3f772ed">move_perso</a></div><div class="ttdeci">void move_perso(perso *p)</div><div class="ttdoc">To mouve the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:131</div></div>
+<div class="ttc" id="aperso_8c_html_a29517d92c86ad5f8be34382407fe0c68"><div class="ttname"><a href="perso_8c.html#a29517d92c86ad5f8be34382407fe0c68">init_perso_controls</a></div><div class="ttdeci">void init_perso_controls(perso *p)</div><div class="ttdoc">To mouve the perso p1 .</div><div class="ttdef"><b>Definition:</b> perso.c:41</div></div>
+<div class="ttc" id="aperso_8c_html_a337d93a9a067ae0ab5489951a8e06f13"><div class="ttname"><a href="perso_8c.html#a337d93a9a067ae0ab5489951a8e06f13">animer_perso</a></div><div class="ttdeci">void animer_perso(perso *p)</div><div class="ttdoc">To animate the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:115</div></div>
+<div class="ttc" id="aperso_8c_html_a85e113caed303126f31c958048e18390"><div class="ttname"><a href="perso_8c.html#a85e113caed303126f31c958048e18390">init_images_perso</a></div><div class="ttdeci">void init_images_perso(perso *p)</div><div class="ttdoc">To initialize sprite the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:61</div></div>
+<div class="ttc" id="aperso_8c_html_a94b273043f51380f95165ff4c0cd5331"><div class="ttname"><a href="perso_8c.html#a94b273043f51380f95165ff4c0cd5331">afficher_perso</a></div><div class="ttdeci">void afficher_perso(perso p, SDL_Surface *screen)</div><div class="ttdoc">To show the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:72</div></div>
+<div class="ttc" id="aperso_8c_html_aa05909edef8cf8cf3989e5b81efd7413"><div class="ttname"><a href="perso_8c.html#aa05909edef8cf8cf3989e5b81efd7413">player_limite</a></div><div class="ttdeci">void player_limite(perso *p, SDL_Surface *screen)</div><div class="ttdoc">To lim the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:182</div></div>
+<div class="ttc" id="aperso_8c_html_aa652096fe816cd5cf9e54ee8c1312060"><div class="ttname"><a href="perso_8c.html#aa652096fe816cd5cf9e54ee8c1312060">init_perso</a></div><div class="ttdeci">void init_perso(perso *p)</div><div class="ttdoc">To initialize the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:23</div></div>
+<div class="ttc" id="aperso_8c_html_abb2113cd5014c2fb1a4def1f6d6ca1a8"><div class="ttname"><a href="perso_8c.html#abb2113cd5014c2fb1a4def1f6d6ca1a8">saut_perso</a></div><div class="ttdeci">void saut_perso(perso *p)</div><div class="ttdoc">To jump the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:162</div></div>
+<div class="ttc" id="aperso_8c_html_ae54508e571fca101a985b69e2485697e"><div class="ttname"><a href="perso_8c.html#ae54508e571fca101a985b69e2485697e">afficher_score_vie</a></div><div class="ttdeci">void afficher_score_vie(perso p, SDL_Surface *screen, int n)</div><div class="ttdoc">To initialize the perso p .</div><div class="ttdef"><b>Definition:</b> perso.c:82</div></div>
+<div class="ttc" id="aperso_8c_html_af4597e7e9e3c98b7617f316fb47ba9bf"><div class="ttname"><a href="perso_8c.html#af4597e7e9e3c98b7617f316fb47ba9bf">init_perso_controls_p2</a></div><div class="ttdeci">void init_perso_controls_p2(perso *p)</div><div class="ttdoc">To mouve the perso p2 .</div><div class="ttdef"><b>Definition:</b> perso.c:51</div></div>
+<div class="ttc" id="astructkeymapping_html"><div class="ttname"><a href="structkeymapping.html">keymapping</a></div><div class="ttdef"><b>Definition:</b> controls.h:4</div></div>
+<div class="ttc" id="astructperso_html"><div class="ttname"><a href="structperso.html">perso</a></div><div class="ttdoc">struct for perso</div><div class="ttdef"><b>Definition:</b> perso.h:20</div></div>
+<div class="ttc" id="astructperso_html_a0598dddec3f59d5e13865fe1b2c566be"><div class="ttname"><a href="structperso.html#a0598dddec3f59d5e13865fe1b2c566be">perso::health</a></div><div class="ttdeci">int health</div><div class="ttdef"><b>Definition:</b> perso.h:21</div></div>
+<div class="ttc" id="astructperso_html_a1702962d93240085dc2dfab4c0d7754f"><div class="ttname"><a href="structperso.html#a1702962d93240085dc2dfab4c0d7754f">perso::pos</a></div><div class="ttdeci">SDL_Rect pos</div><div class="ttdef"><b>Definition:</b> perso.h:27</div></div>
+<div class="ttc" id="astructperso_html_a2330bb4058a3c590424f7b66f0a1d8ca"><div class="ttname"><a href="structperso.html#a2330bb4058a3c590424f7b66f0a1d8ca">perso::speed</a></div><div class="ttdeci">int speed</div><div class="ttdef"><b>Definition:</b> perso.h:24</div></div>
+<div class="ttc" id="astructperso_html_a3bb43b8e820b3ba348b6c96458b39231"><div class="ttname"><a href="structperso.html#a3bb43b8e820b3ba348b6c96458b39231">perso::image</a></div><div class="ttdeci">SDL_Surface * image</div><div class="ttdef"><b>Definition:</b> perso.h:31</div></div>
+<div class="ttc" id="astructperso_html_a41362c60ce965d63463fb5fe4aefb519"><div class="ttname"><a href="structperso.html#a41362c60ce965d63463fb5fe4aefb519">perso::jump</a></div><div class="ttdeci">int jump</div><div class="ttdef"><b>Definition:</b> perso.h:25</div></div>
+<div class="ttc" id="astructperso_html_a49e19e00dfbdcd05d21a5ba7df809708"><div class="ttname"><a href="structperso.html#a49e19e00dfbdcd05d21a5ba7df809708">perso::score</a></div><div class="ttdeci">int score</div><div class="ttdef"><b>Definition:</b> perso.h:22</div></div>
+<div class="ttc" id="astructperso_html_ab2faa1b6593861976ebaf78743c1074b"><div class="ttname"><a href="structperso.html#ab2faa1b6593861976ebaf78743c1074b">perso::sprite</a></div><div class="ttdeci">SDL_Rect sprite</div><div class="ttdef"><b>Definition:</b> perso.h:28</div></div>
+<div class="ttc" id="astructperso_html_ac312a4c1a5a2e37e1731d31f524455bb"><div class="ttname"><a href="structperso.html#ac312a4c1a5a2e37e1731d31f524455bb">perso::vie</a></div><div class="ttdeci">int vie</div><div class="ttdef"><b>Definition:</b> perso.h:23</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
