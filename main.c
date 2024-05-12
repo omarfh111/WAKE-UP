@@ -19,13 +19,15 @@ SDL_Quit();
 return 1;
 }
 bg background;
-initbg(&background);
 image heart;
 image heart2;
+char background_filename[] = "MAP.png";
+initbg(&background, background_filename);
 imgheart(&heart);
 imgheart2(&heart2);
 Mix_Music *bgMusic;
 musicLoad1(bgMusic);
+Mix_Chunk *jumpSound = NULL;
 int quit = 0;
 int scrollingRight = 0, scrollingLeft = 0, scrollingUp = 0, scrollingDown = 0;
 int splitScreen = 0;
@@ -37,7 +39,7 @@ while (SDL_PollEvent(&event))
 if (event.type == SDL_QUIT) 
 {
 quit = 1;
-}
+} 
 else if (event.type == SDL_KEYDOWN) 
 {
 switch (event.key.keysym.sym) 
@@ -57,9 +59,12 @@ break;
 case SDLK_s:
 splitScreen = !splitScreen;
 break;
+case SDLK_LCTRL:
+soundeffect(jumpSound);
+break;
 }
-}
-else if (event.type == SDL_KEYUP) 
+} 
+else if (event.type == SDL_KEYUP)
 {
 switch (event.key.keysym.sym) 
 {
@@ -78,6 +83,7 @@ break;
 }
 }
 }
+
 if (scrollingRight) 
 {
 scrolling(&background, 0, 10, 0); 
@@ -90,12 +96,12 @@ if (scrollingUp)
 {
 scrolling(&background, 2, 0, 10); 
 }
-if (scrollingDown)
+if (scrollingDown) 
 {
 scrolling(&background, 3, 0, 10); 
 }
 SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-if(splitScreen) 
+if (splitScreen) 
 {
 splitscreen(screen, &background);
 afficherheart(&heart, screen);
@@ -110,8 +116,11 @@ SDL_Flip(screen);
 SDL_Delay(10);
 }
 Mix_FreeMusic(bgMusic);
+if (jumpSound != NULL) 
+{
+Mix_FreeChunk(jumpSound);
+}
 SDL_Quit();
 return 0;
 }
-
 
