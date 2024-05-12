@@ -58,8 +58,8 @@ void init_perso_controls_p2(perso * p) {
 * @param p the perso
 * @return Nothing
 */
-void init_images_perso(perso * p) {
-  ( *p).image = IMG_Load("spritesheet.png");
+void init_images_perso(perso * p,char *filename) {
+  ( *p).image = IMG_Load(filename);
   ( *p).pos.w = ( *p).image->w/4;
   ( *p).pos.h = ( *p).image->h/4;
 }
