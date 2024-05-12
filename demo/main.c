@@ -70,11 +70,12 @@ int main()
 	int bs=0;
 	int b3=0;
 	int b4=0;
+	int b5=0;
 	int i1=0;
 	int i2=0;
 	int fullscreenMode = 0;
-	image Backg,Backg1,Backg2,Backgr,Backg3,Backg4;
-	image B1,B2,B3,B4,B5,B6,B7,B8,B9,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22	;
+	image Backg,Backg1,Backg2,Backgr,Backg3,Backg4,Backg5;
+	image B1,B2,B3,B4,B5,B6,B7,B8,B9,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24	;
 	SDL_Event event;
 	SDL_Event event1;
 	Text t2,t3,t4,t5,t6;
@@ -109,6 +110,7 @@ int main()
 	initBackground(&Backgr,"help them.png");
 	initBackgroundwindow(&Backg3,"4.png");
 	initBackgroundwindow(&Backg4,"5.png");
+	initBackgroundwindow(&Backg5,"8.png");
 	initbouton(&B1,"start1.png",241.5,506);
 	initbouton(&B2,"settings1.png",618.5,504.25);
 	initbouton(&B3,"help1.png",1077.5,506.25);
@@ -136,6 +138,8 @@ int main()
 	initbouton(&B19,"3.png",705,460);
 	initbouton(&B22,"6.png",703,188);
 	initbouton(&B21,"7.png",705,444);
+	initbouton(&B23,"9.png",1120,145);
+	initbouton(&B24,"10.png",545,145);
 	inittext2(&t2);
 	inittext3(&t3);
 	inittext4(&t4);
@@ -199,21 +203,11 @@ int main()
 				    SDL_SetVideoMode(SCREEN_W, SCREEN_H, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 				}
 				break;
-				      if(((event.motion.x >= 230 && event.motion.x <= 483 && event.motion.y >= 507 && event.motion.y <= 923) || (event1.motion.x>29 && event1.motion.x<=309 && event1.motion.y>39 && event1.motion.y<=107)||(event.motion.x >= 630 && event.motion.x <= 883 && event.motion.y >= 507 && 				event.motion.y <= 923) || (event.motion.x >= 1080 && event.motion.x <= 1333 && event.motion.y >= 507 && event.motion.y <= 923) || (event.motion.x >= 1500 && event.motion.x <= 1753 && event.motion.y >= 507 && event.motion.y <= 923)))
-                {
-                
-                if(soundp==0)
-                 Mix_PlayChannel(-1,son1, 0);
-                    soundp=1;
-                }
-                else if (soundp ==1)
-                    soundp=0;
-			break;
 			case SDL_MOUSEBUTTONDOWN :
 		
 				if ((event.motion.x>622)&&(event.motion.x<=872)&&(event.motion.y>860)&&(event.motion.y<=921))//settings
-				{
-					while (bg)
+				{	bs=1;
+					while (bs==1 && bg==1)
 					{
 						
 						afficher(Backg1,screen);
@@ -271,7 +265,7 @@ int main()
 								break;
 							case SDL_MOUSEBUTTONUP:
 								if (event1.motion.x>29 && event1.motion.x<=309 && event1.motion.y>39 && event1.motion.y<=107)//retour au menu
-								{
+								{	bs=0;
 									bg=0;
 									SDL_Flip(screen);	
 								}
@@ -314,7 +308,7 @@ int main()
 						
 		}
 		
-		
+		bs=0;
 		bg=1;
 		SDL_Flip(screen);
 		if ((event.motion.x>1486)&&(event.motion.x<=1736)&&(event.motion.y>860)&&(event.motion.y<=921))//exite
@@ -437,7 +431,7 @@ int main()
 			 	if (event1.motion.x >= 657 && event1.motion.x <= 1265 && event1.motion.y >= 305 && event1.motion.y <= 453)
 				{	
 					afficher(B22,screen);
-					b4=1;
+					//b4=1;
 					//Mix_PlayChannel(-1,son,0);
 					SDL_Flip(screen);
 				}
@@ -456,9 +450,24 @@ int main()
 				}
 				break;
 			case SDL_MOUSEBUTTONUP://menu retour
+			 	if (event1.motion.x >= 657 && event1.motion.x <= 1265 && event1.motion.y >= 305 && event1.motion.y <= 453)
+				{	
+					//afficher(Backg5,screen);
+					b4=1;
+					b3=0;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				if (event1.motion.x >= 657 && event1.motion.x <= 1265 && event1.motion.y >= 560 && event1.motion.y <= 708)
+				{	
+					afficher(B21,screen);
+					//b4=1;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
 				if (event1.motion.x >= 520 && event1.motion.x <= 860 && event1.motion.y >= 837 && event1.motion.y <= 900)
 				{	
-					//bg=0;
+					bg=0;
 					b3=0;
 					SDL_Flip(screen);
 				}
@@ -468,17 +477,129 @@ int main()
   	}
   	SDL_Flip(screen);
   	}
-  	while(b4!=0){
-  	                /*switch (event.key.keysym.sym) {
+  	while(b4!=0)//boucle style vestimentaire
+  	{
+  		afficher(Backg5,screen);
+  		SDL_PollEvent(&event1);
+  		switch(event1.type)
+   	 	{
+      			case SDL_QUIT:
+      			bfin= 1;
+        		break;
+			case SDL_KEYUP:
+      			switch(event1.key.keysym.sym)
+       			{
+				case SDLK_h:
+				bg=0;
+				b4=0;
+				//SDL_Flip(screen);
+				bfin=1;
+				break;
+  			}
+  			case SDL_MOUSEMOTION ://in menu solo multiplayer omar
+			 	if (event1.motion.x >= 497 && event1.motion.x <= 865 && event1.motion.y >= 193 && event1.motion.y <= 638)
+				{	
+					afficher(B24,screen);
+					//b4=1;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				if (event1.motion.x >= 1074 && event1.motion.x <= 1442 && event1.motion.y >= 193 && event1.motion.y <= 638)
+				{	
+					afficher(B23,screen);
+					//b3=1;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				if (event1.motion.x >= 520 && event1.motion.x <= 860 && event1.motion.y >= 837 && event1.motion.y <= 900)
+				{	
+					afficher(B13,screen);
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				break;
+			case SDL_MOUSEBUTTONUP://menu retour
+			 	if (event1.motion.x >= 520 && event1.motion.x <= 860 && event1.motion.y >= 837 && event1.motion.y <= 900)
+				{	
+					//afficher(Backg5,screen);
+					b4=0;
+					b3=1;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				if (event1.motion.x >= 497 && event1.motion.x <= 865 && event1.motion.y >= 193 && event1.motion.y <= 638)
+				{	
+					//afficher(B24,screen);
+					b5=1;
+					b4=0;
+					b3=0;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+				if (event1.motion.x >= 1074 && event1.motion.x <= 1442 && event1.motion.y >= 193 && event1.motion.y <= 638)
+				{	
+					//afficher(B23,screen);
+					b5=1;
+					//Mix_PlayChannel(-1,son,0);
+					SDL_Flip(screen);
+				}
+		}
+  	
+  	SDL_Flip(screen);
+  	}
+  	while(b5!=0){
+  	SDL_PollEvent(&event1);
+  	switch(event1.type)
+   	 	{	
+      			case SDL_QUIT:
+      			bfin= 1;
+        		break;
+			case SDL_KEYUP:
+      			switch(event1.key.keysym.sym)
+       			{
+				case SDLK_h:
+				b3=0;
+				b5=0;
+				bg=1;
+				q=0;
+				//SDL_Flip(screen);
+				bfin=1;
+				break;
+  			}
+  	                /*switch (event.key.keysym.sym) 
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE)
-					q=0;}*/
+				q=0;}*/
+	}
   	    while (q) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
+            	b4=0;
+            	b3=0;
+		b5=0;
+		bg=0;
                 q = 0;
             } else if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
+            	    case SDLK_p:
+            		q=0;
+			b5=0;
+			b4=0;
+			b3=0;
+			bg=0;
+			//q=0;
+			bs=1;
+			SDL_Flip(screen);
+            		break;
+           	    case SDLK_h:
+			b3=0;
+			b5=0;
+			b4=0;
+			bg=0;
+			q=0;
+			//SDL_Flip(screen);
+			bfin=1;
+			break;
                     case SDLK_LEFT:
                         scrollLeft = 1; // Set left scroll flag when left arrow is pressed
                         break;
@@ -497,6 +618,10 @@ int main()
                 }
             }
         }
+       /* if (event.key.keysym.sym==SDLK_ESCAPE){
+        	bs=1;
+        	b4=0;
+        	bg=0;}*/
 
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
@@ -629,6 +754,7 @@ int main()
 	liberer(Backgr);
 	liberer(Backg3);
 	liberer(Backg4);
+	liberer(Backg5);
 	liberer(B1);
 	liberer(B2);
 	liberer(B3);
@@ -650,6 +776,8 @@ int main()
 	liberer(B20);
 	liberer(B21);
 	liberer(B22);
+	liberer(B23);
+	liberer(B24);	
 	//////////////
 	freetext(t2);
 	freetext(t3);
