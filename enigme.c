@@ -250,7 +250,7 @@ SDL_FreeSurface(r3surface);
 
 void genererEnigme(char* filename, enigme* e) {
   FILE* fp = fopen(filename, "r");
-    int random_question_index = rand() % 18 + 1;
+    int random_question_index = rand() % 22 + 1;
     int current_question_index = 0;
     char line[500];
  	
