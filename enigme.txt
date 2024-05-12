@@ -88,7 +88,26 @@ A)H2O
 B)CO2
 C)NaCl
 1
-
+Who lead Carthage's army
+A)Hamza Fhaiel
+B)Jemai Amrou
+C)Hannibal
+3
+Capital of Tunisia
+A)Jendouba
+B)Sousse
+C)Tunis
+3
+Find the odd one out
+A)C
+B)JavaScript
+C)Google
+3
+(x)²=4
+A)x=2
+B)x=-2
+C)A et B
+3
 
 
 
