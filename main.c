@@ -14,6 +14,9 @@
 void main(){
 	
 //declaration game
+    scoreinfo scores[15];
+    scoreinfo s;
+    loadbestscore("scores.txt", scores);
     bg bg,mask;
     perso p1,p2;
     enemy e;
@@ -24,7 +27,7 @@ void main(){
     int scrollLeft = 0; // Flag for left scrolling
     int scrollRight = 0; // Flag for right scrolling
     int resizingFactor=4;
-  
+    char playername[20];
     SDL_PumpEvents();
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
@@ -76,8 +79,9 @@ void main(){
 //declaration console menu
 	int c;
 	int c1;
-	printf("1.solo\n2.multiplayer\n0.quitter\n");
+	printf("1.solo\n2.multiplayer\n3.bestscore\n4.playername\n0.quit");
 	scanf("%d",&c);
+	 do {
 	switch(c)
 	{
 		case 0:
@@ -96,6 +100,12 @@ void main(){
                     case SDLK_RIGHT:
                         scrollRight = 1; // Set right scroll flag when right arrow is pressed
                         break;
+                        case SDLK_LCTRL: // Check for left Ctrl key
+                    if ((event.key.keysym.mod & KMOD_CTRL) != 0) { // Check if Ctrl key is pressed
+                        p1.score += 100; // Increment score by 100
+                        printf("Score: %d\n", p1.score); // Debug print to check if the score increases
+                    }
+                    break;
                 }
             } else if (event.type == SDL_KEYUP) {
                 switch (event.key.keysym.sym) {
@@ -108,8 +118,6 @@ void main(){
                 }
             }
         }
-        if(event.key.keysym.sym == SDLK_ESCAPE)
-        { q=0;};
 
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
@@ -124,19 +132,18 @@ void main(){
         
 	
 	afficherbg(&mask, screen);
-        //afficherbg(&bg, screen);
+        afficherbg(&bg, screen);
         SDL_Delay(60);
         afficher_perso(p1, screen);
         afficher_score_vie(p1, screen, 0);
         animer_perso(&p1);
         drawEnemy(screen, e);
-       // move_perso(&p1);
-        //saut_perso(&p1);
+        move_perso(&p1);
+        saut_perso(&p1);
         
-        
-   /*  hethi collision mich partfaite fi jorrit el mask  */  
+   /* hethi collision mich partfaite fi jorrit el mask  */  
           
-           if (!CollisionHorizontale(mask.img, p1.pos)) {
+           /*if (!CollisionHorizontale(mask.img, p1.pos)) {
         move_perso(&p1);
         saut_perso(&p1);
     }
@@ -151,7 +158,7 @@ void main(){
       saut_perso(&p1);
       p1.pos.y -= 2;
      }
-    
+    */
  
     
     printf("Player position: X = %d, Y = %d\n", p1.pos.x, p1.pos.y);
@@ -177,15 +184,15 @@ void main(){
         
         UpdateMinimap(&minimap, p1.pos, resizingFactor, screen->w, screen->h);
         DisplayMinimap(&minimap, screen);
-
+displayScore(screen, font, p1);
         afficherTempsLevel(tempsDebut, dureeTotale, screen, font);
-        if(event.key.keysym.sym==SDLK_o) 
-        {
-        sauvegarder(p1, bg,"Load.bin");
-        printf("p1 data saved successfully");
-        q=0;
-        
-        }   
+        if (event.key.keysym.sym == SDLK_o) {
+            sauvegarder(p1, bg, "Load.bin");
+            printf("p1 data saved successfully\n");
+            printf("Final score: %d\n", p1.score);
+            savescore(SDL_GetTicks() - tempsDebut, p1,scores,"scores.txt",playername);
+            q = 0;
+        }
          if(event.key.keysym.sym==SDLK_e) 
          { 
          afficher_imageBMP(screen, IMAGE);
@@ -308,7 +315,7 @@ case SDL_QUIT:
         }
 	
 	afficherbg(&mask, screen);
-        //afficherbg(&bg, screen);
+        afficherbg(&bg, screen);
         SDL_Delay(60);
         afficher_perso(p1, screen);
         afficher_score_vie(p1, screen, 0);
@@ -405,5 +412,20 @@ case SDL_QUIT:
         SDL_Delay(10); 
     }
 			break;
-	}   
+	case 3:
+	printBestScores(scores);
+	printf("1.solo\n2.multiplayer\n3.bestscore\n4.playername\n0.quit");
+    scanf("%d", &c);
+	break;
+	   
+case 4:
+    printf("playername:\n");
+    scanf("%s",playername);
+    printf("1.solo\n2.multiplayer\n3.bestscore\n4.playername\n0.quit");
+    scanf("%d", &c); // Update the value of c
+    break;
+ }
+
+    } while (q); // Continue looping until q is not true (i.e., 0)
+
 }
