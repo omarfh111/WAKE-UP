@@ -9,7 +9,17 @@
 
 #define SCREEN_H 410 
 #define SCREEN_W 640
-
+/**
+* @file enigme.h
+* @brief Testing Program.
+* @author Hamza Fhaiel
+* @version 0.1
+* @date may 12 2024
+*
+* Testing program for enigme display with random positions of the 3 answers
+*
+*/
+  
 
 typedef struct 
 { 
@@ -32,8 +42,8 @@ typedef struct {
 } enigme;
 
 
-void afficherEnigme(SDL_Surface *screen, enigme e);
-
+void afficherEnigme(SDL_Surface *screen, enigme e,int tb);
+void afficherTempsPuzzle(int tempsDebut, int dureeTotale, SDL_Surface *screen, TTF_Font *font);
 // definition des fenetre des fonction 
 
 //definition pour la manipulation de l'image 
