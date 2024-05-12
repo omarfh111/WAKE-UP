@@ -102,6 +102,7 @@ return;
 } 
 else {
 int i;
+for (i = 0; i < 10; i++) {
 fscanf(score, "playername:%s score:%d temps:%d\n", scores[i].playername, &scores[i].score, &scores[i].temps);
 }
 fclose(score);
@@ -133,8 +134,3 @@ scorePosition.y = 50 - scoreSurface->h - 10; // Adjusted for bottom right corner
 SDL_BlitSurface(scoreSurface, NULL, screen, &scorePosition);
 SDL_FreeSurface(scoreSurface);
 }
-
-
-
-
-
