@@ -815,8 +815,9 @@ INPUT_ENCODING         = UTF-8
 # *.m, *.markdown, *.md, *.mm, *.dox, *.py, *.pyw, *.f90, *.f95, *.f03, *.f08,
 # *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf and *.qsf.
 
-FILE_PATTERNS          = main.c 
-			 *enigme.c\
+FILE_PATTERNS          = *.main.c \
+			 enigme.h 
+			enigme.c 
                          *.cc \
                          *.cxx \
                          *.cpp \
@@ -830,7 +831,7 @@ FILE_PATTERNS          = main.c
                          *.idl \
                          *.ddl \
                          *.odl \
-                         enigme.h 
+                         
                          *.hh \
                          *.hxx \
                          *.hpp \
