@@ -13,6 +13,9 @@
 
 int main()
 {   TTF_Init();
+    TTF_Font *funt=TTF_OpenFont("MontserratAlternates-Black.otf",24);
+    int tempsDebut=SDL_GetTicks();
+    int dureeTotale=60*1000;
    SDL_Init(SDL_INIT_VIDEO);
    SDL_Surface *screen=NULL;
     image IMAGE, IMAGE_BTN1, IMAGE_BTN2;
@@ -23,7 +26,8 @@ int main()
     e.numbr=0;
     int input=0;
     int boucleinput=0;
-   
+   srand(time(NULL));
+	int tb = rand() % 3;
     
    
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) == -1)
@@ -66,9 +70,8 @@ genererEnigme("enigme.txt", &e);
     {
 
         afficher_imageBMP(screen, IMAGE);
-
-	
-        afficherEnigme(screen,e);
+        
+        afficherEnigme(screen,e,tb);
 animate(screen,&e) ;
         while (SDL_PollEvent(&event))
         {
@@ -142,11 +145,12 @@ case SDL_QUIT:
 
 }
 	afficher_imageBTN2(screen,IMAGE_BTN2 ) ;
+        
 
 	SDL_Flip(screen);
 
 
-}
+}afficherTempsPuzzle(tempsDebut,dureeTotale, screen,funt);
 }
 
 }SDL_Flip(screen);
